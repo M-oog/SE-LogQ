@@ -100,6 +100,14 @@
     </div>
 
     <h2>Methodology Overview</h2>
+    
+    <div class="image-container">
+        <img src="./assets/figure1.png" alt="Comparison of quantization strategies">
+        <div class="caption">
+            <strong>Figure 1: Comparison of quantization strategies.</strong> Left: Transfer functions show that our log-based method allocates denser quantization steps near zero, in contrast to the uniform linear mapping of AdaBM. Right: Alignment visualization illustrates that our adaptive levels effectively cover the high-density peak of Laplacian-distributed activations, while uniform quantization wastes bit-width on the sparse tails.
+        </div>
+    </div>
+    
     <div class="image-container">
         <img src="./assets/method.png" alt="Overview of SE-LogQ Method">
         <div class="caption">
@@ -126,6 +134,13 @@
             <strong>Figure 2:</strong> Visual comparison between different PTQ methods under the W4A4 setting. SE-LogQ effectively suppresses jagged artifacts and broken discontinuities in dense regions.
         </div>
     </div>
+
+   <div class="image-container">
+        <img src="./assets/figure5.png" alt="Visualization of spatial bit-width allocation maps">
+        <div class="caption">
+            <strong>Figure 5: Visualization of spatial bit-width allocation maps.</strong> Columns from left to right: Original images, maps by AdaBM and Ours, and the different regions between the maps by AdaBM and Ours, respectively. This demonstrates how the entropy-adaptive scheme robustly directs bits toward low-contrast yet structurally informative details compared to the fixed-threshold scheme.
+        </div>
+    </div> 
 
 </div>
 

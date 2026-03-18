@@ -25,7 +25,7 @@
             text-align: center;
             color: #2c3e50;
             font-size: 2.2em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         h2 {
             color: #2c3e50;
@@ -35,28 +35,26 @@
         }
         .authors {
             text-align: center;
-            font-size: 1.2em;
-            color: #555;
-            margin-bottom: 20px;
+            font-size: 1.25em;
+            margin-bottom: 5px;
         }
-        .links {
+        .authors a {
+            color: #2980b9;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+        .authors a:hover {
+            text-decoration: underline;
+            color: #1c5980;
+        }
+        .affiliations {
             text-align: center;
+            font-size: 1.05em;
+            color: #555;
             margin-bottom: 40px;
         }
-        .links a {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 8px 20px;
-            background-color: #2980b9;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        .links a:hover {
-            background-color: #1c5980;
-        }
+        
         .abstract-box {
             background-color: #f8f9fa;
             padding: 20px 30px;
@@ -86,28 +84,31 @@
 
 <div class="container">
     <h1>SE-LogQ: Spectral Entropy Modulated Logarithmic Quantization for Image Super-Resolution</h1>
-    <div class="authors">Anonymous Authors</div>
     
-    <div class="links">
-        <a href="#">[ Paper ]</a>
-        <a href="#">[ Code ]</a>
+    <div class="authors">
+        <a href="https://github.com/M-oog" target="_blank">Xiaotong Mao</a>
+        <a href="https://sites.google.com/view/xjguo" target="_blank">Xiaojie Guo</a><sup>✉</sup>
+    </div>
+    
+    <div class="affiliations">
+        College of Intelligence and Computing, Tianjin University, Tianjin, China
     </div>
 
     <h2>Abstract</h2>
     <div class="abstract-box">
-        <p>Quantization-Aware Training (QAT) and Post-Training Quantization (PTQ) represent the two main approaches for efficient deployment of super-resolution (SR) models under low-bit quantization[cite: 60]. Unlike QAT, which requires retraining, PTQ is often preferred for its rapid deployment[cite: 61]. However, improving PTQ accuracy remains challenging due to two key issues: linear quantization grids poorly approximate the heavy-tailed activation distributions of SR models, and magnitude-based calibration metrics underrepresent low-contrast yet structurally critical features[cite: 62]. To address these issues, we propose SE-LogQ, a spectral entropy modulated logarithmic quantization framework[cite: 63]. Extensive experiments reveal that SE-LogQ outperforms state-of-the-art PTQ methods in reconstruction quality while incurring minimal computational cost[cite: 66].</p>
+        <p>Quantization-Aware Training (QAT) and Post-Training Quantization (PTQ) represent the two main approaches for efficient deployment of super-resolution (SR) models under low-bit quantization. Unlike QAT, which requires retraining, PTQ is often preferred for its rapid deployment. However, improving PTQ accuracy remains challenging due to two key issues: linear quantization grids poorly approximate the heavy-tailed activation distributions of SR models, and magnitude-based calibration metrics underrepresent low-contrast yet structurally critical features. To address these issues, we propose SE-LogQ, a spectral entropy modulated logarithmic quantization framework. A logarithmic quantization scheme with channel-wise scale optimization aligns with the Laplacian-like SR activations while adapting to diverse channel dynamic ranges. A spectral entropy guided bit-allocation strategy leverages frequency-domain statistics to quantify structural regularity, decoupling feature importance from signal magnitude and ensuring precise allocation for subtle textures and edges. Extensive experiments reveal that SE-LogQ outperforms state-of-the-art PTQ methods in reconstruction quality while incurring minimal computational cost.</p>
     </div>
 
     <h2>Methodology Overview</h2>
     <div class="image-container">
         <img src="./assets/method.png" alt="Overview of SE-LogQ Method">
         <div class="caption">
-            <strong>Figure 1:</strong> Overview of SE-LogQ[cite: 237]. The Spectral Entropy Modulation Branch generates spatial signals that modulate the log-based activation Quantization modules within the SR backbone[cite: 237].
+            <strong>Figure 1:</strong> Overview of SE-LogQ. The Spectral Entropy Modulation Branch generates spatial signals that modulate the log-based activation Quantization modules within the SR backbone. The bottom section illustrates the integration of log-based activation quantization with channel-wise weight quantization inside a residual block.
         </div>
     </div>
 
     <h2>Quantitative Results</h2>
-    <p>SE-LogQ demonstrates superior performance across standard benchmarks, particularly in the challenging W4A4 setting[cite: 554]. On the Urban100 dataset using the RDN model, it achieves a PSNR of 25.98 dB and an SSIM of 0.783, with a Feature Average Bit-width (FAB) of 3.7[cite: 556, 411]. When applied to the EDSR model for a scale factor of 4, it reaches 25.73 dB PSNR and 0.772 SSIM[cite: 411].</p>
+    <p>SE-LogQ demonstrates superior performance across standard benchmarks, particularly in the challenging W4A4 setting.</p>
     
     <div class="image-container">
         <img src="./assets/quantitative.png" alt="Table 1: Quantitative Results">
@@ -117,12 +118,12 @@
     </div>
 
     <h2>Qualitative Results</h2>
-    <p>Traditional linear uniform quantization methods often suffer from severe structural collapse and fail to reconstruct dense grid patterns[cite: 644]. In contrast, SE-LogQ effectively suppresses these artifacts, faithfully restoring continuous diagonal grids and preserving sharp, high-contrast edges[cite: 646]. Our entropy-driven strategy successfully targets subtle structures, adaptively allocating higher bit-widths to faint facial features, smooth gradients in skies, and low-luminance textures[cite: 647, 649].</p>
+    <p>Traditional linear uniform quantization methods often suffer from severe structural collapse and fail to reconstruct dense grid patterns. In contrast, SE-LogQ effectively suppresses these artifacts, faithfully restoring continuous diagonal grids and preserving sharp, high-contrast edges. Our entropy-driven strategy successfully targets subtle structures, adaptively allocating higher bit-widths to faint facial features, smooth gradients in skies, and low-luminance textures.</p>
     
     <div class="image-container">
         <img src="./assets/qualitative.png" alt="Qualitative comparison of super-resolution results">
         <div class="caption">
-            <strong>Figure 2:</strong> Visual comparison between different PTQ methods under the W4A4 setting[cite: 641]. SE-LogQ effectively suppresses jagged artifacts and broken discontinuities in dense regions[cite: 645, 646].
+            <strong>Figure 2:</strong> Visual comparison between different PTQ methods under the W4A4 setting. SE-LogQ effectively suppresses jagged artifacts and broken discontinuities in dense regions.
         </div>
     </div>
 

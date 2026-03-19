@@ -182,6 +182,14 @@
         </div>
     </div>
 
+    <p>As highlighted in Table 2, SE-LogQ achieves the lowest Feature Average Bit-width (FAB) of 4.0, reducing computational costs to <strong>2.5T BitOPs</strong> on Urban100. This surpasses both the PTQ baseline AdaBM (3.0T) and the QAT method CADyQ (3.8T). Crucially, SE-LogQ enables rapid deployment by completing calibration in just <strong>56 seconds</strong>—orders of magnitude faster than the 40 hours required for QAT—all while delivering superior reconstruction fidelity (25.66 dB).</p>
+    <div class="image-container">
+        <img src="./assets/table2.png" alt="Table 2: Complexity Analysis">
+        <div class="caption">
+            <strong>Table 2: Complexity analysis for different quantization methods on SR.</strong> Metrics are reported for quantizing EDSR of scale 4 on Urban100 dataset. The BitOPs are calculated based on generating a High-Resolution image with a size of 3 × 1280 × 720.
+        </div>
+    </div>
+
     <h2>Qualitative Results</h2>
     <p>Traditional linear uniform quantization methods often suffer from severe structural collapse and fail to reconstruct dense grid patterns. In contrast, SE-LogQ effectively suppresses these artifacts, faithfully restoring continuous diagonal grids and preserving sharp, high-contrast edges. Our entropy-driven strategy successfully targets subtle structures, adaptively allocating higher bit-widths to faint facial features, smooth gradients in skies, and low-luminance textures.</p>
     

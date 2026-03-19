@@ -62,6 +62,51 @@
             border-radius: 4px;
             margin-bottom: 40px;
         }
+
+        .issues-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+        .issue-box {
+            flex: 1;
+            background-color: #f8f9fa;
+            padding: 20px 25px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .issue-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        }
+        .issue-box h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            font-size: 1.15em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        .issue-icon {
+            margin-right: 8px;
+            font-size: 1.1em;
+        }
+        .issue-box p {
+            font-size: 0.95em;
+            color: #555;
+            text-align: justify;
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .issues-container {
+                flex-direction: column;
+            }
+        }
+
         .image-container {
             text-align: center;
             margin: 30px 0;
@@ -97,6 +142,18 @@
     <h2>Abstract</h2>
     <div class="abstract-box">
         <p>Quantization-Aware Training (QAT) and Post-Training Quantization (PTQ) represent the two main approaches for efficient deployment of super-resolution (SR) models under low-bit quantization. Unlike QAT, which requires retraining, PTQ is often preferred for its rapid deployment. However, improving PTQ accuracy remains challenging due to two key issues: linear quantization grids poorly approximate the heavy-tailed activation distributions of SR models, and magnitude-based calibration metrics underrepresent low-contrast yet structurally critical features. To address these issues, we propose SE-LogQ, a spectral entropy modulated logarithmic quantization framework. A logarithmic quantization scheme with channel-wise scale optimization aligns with the Laplacian-like SR activations while adapting to diverse channel dynamic ranges. A spectral entropy guided bit-allocation strategy leverages frequency-domain statistics to quantify structural regularity, decoupling feature importance from signal magnitude and ensuring precise allocation for subtle textures and edges. Extensive experiments reveal that SE-LogQ outperforms state-of-the-art PTQ methods in reconstruction quality while incurring minimal computational cost.</p>
+    </div>
+
+    <h2>Key Challenges in Existing PTQ for SR</h2>
+    <div class="issues-container">
+        <div class="issue-box">
+            <h3><span class="issue-icon">📉</span> Issue I: Distribution Mismatch</h3>
+            <p>Linear quantization enforces uniformly spaced levels, which are inherently incompatible with the heavy-tailed and sharply peaked statistics of SR residuals. This mismatch leads to structural inefficiency, say information-dense regions near zero are under-sampled, while excessive bit-width is wasted on sparse tails, severely degrading reconstruction fidelity.</p>
+        </div>
+        <div class="issue-box">
+            <h3><span class="issue-icon">⚖️</span> Issue II: Energy-Structure Ambiguity</h3>
+            <p>Existing PTQ approaches predominantly rely on magnitude-driven metrics to estimate feature importance. However, such metrics conflate signal energy with structural relevance. High-energy noise may be overemphasized, whereas low-contrast but structurally meaningful textures are underestimated, leading to the preservation of artifacts instead of critical details.</p>
+        </div>
     </div>
 
     <h2>Methodology Overview</h2>
